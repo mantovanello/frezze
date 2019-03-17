@@ -1,18 +1,21 @@
-import { AfterContentChecked, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterContentChecked, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSort, MatTableDataSource } from '@angular/material';
 import { TrackRecommendationsService } from '../track-recommendations.service';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-track-recommendations',
   templateUrl: './track-recommendations.component.html',
   styleUrls: ['./track-recommendations.component.css']
 })
-export class TrackRecommendationsComponent implements OnInit, AfterContentChecked {
+export class TrackRecommendationsComponent implements OnInit, AfterContentChecked, OnDestroy {
   /**
    * Define presented table columns
    */
   tableColumns  :  string[] = ['trackTitle', 'artistName', 'albumThumbnailURL', 'albumTitle', 'albumReleaseDate', 'trackNumber', 'trackDuration'];
   dataSource = null;
+  private trackRecommendationsSubscription: Subscription;
 
   @ViewChild(MatSort) sort: MatSort;
 
@@ -20,11 +23,14 @@ export class TrackRecommendationsComponent implements OnInit, AfterContentChecke
 
   ngOnInit() {
     this.getTrackRecommendations();
-    
   }
 
   ngAfterContentChecked() {
     this.dataSource.sort = this.sort;
+  }
+
+  ngOnDestroy() {
+    this.trackRecommendationsSubscription.unsubscribe;
   }
 
   applyFilter(filterValue: string) {
@@ -32,7 +38,7 @@ export class TrackRecommendationsComponent implements OnInit, AfterContentChecke
   }
 
   getTrackRecommendations(): void {
-    this.trackRecommendationsService.getTrackRecommendations()
+    this.trackRecommendationsSubscription = this.trackRecommendationsService.getTrackRecommendations()
     .subscribe(trackRecommendations => {
       /**
        * Populate datasource with retrieved data from service

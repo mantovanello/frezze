@@ -34,10 +34,14 @@ export class TrackRecommendationsService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
-      // Send the error to remote logging infrastructure
+      /** 
+       * Send the error to remote logging infrastructure
+       */ 
       console.error(error); // log to console instead
 
-      // Let the app keep running by returning an empty result.
+      /**
+       * Let the app keep running by returning an empty result
+       */
       return of(result as T);
     };
   }

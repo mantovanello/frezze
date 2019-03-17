@@ -1,0 +1,53 @@
+<div>
+  <div>
+    <p>
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+    </p>
+  </div>
+  <div>
+    <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="trackTitle">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>TITLE</th>
+        <td mat-cell *matCellDef="let trackRecommendation"><a href="{{trackRecommendation.trackURL}}"
+            target="_blank">{{trackRecommendation.trackTitle}}</a>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="artistName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ARTIST</th>
+        <td mat-cell *matCellDef="let trackRecommendation">
+          <a href="{{trackRecommendation.artistURL}}" target="_blank">{{trackRecommendation.artistName}}</a>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="albumThumbnailURL">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let trackRecommendation">
+          <a href="{{trackRecommendation.albumURL}}" target="_blank">
+            <img src="{{trackRecommendation.albumThumbnailURL}}">
+          </a>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="albumTitle">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>ALBUM</th>
+        <td mat-cell *matCellDef="let trackRecommendation">
+          <a href="{{trackRecommendation.albumURL}}" target="_blank">{{trackRecommendation.albumTitle}}</a>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="albumReleaseDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>YEAR</th>
+        <td mat-cell *matCellDef="let trackRecommendation">{{trackRecommendation.albumReleaseDate | slice:0:4}}</td>
+      </ng-container>
+      <ng-container matColumnDef="trackNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>#N</th>
+        <td mat-cell *matCellDef="let trackRecommendation">{{trackRecommendation.trackNumber}}</td>
+      </ng-container>
+      <ng-container matColumnDef="trackDuration">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>DURATION</th>
+        <td mat-cell *matCellDef="let trackRecommendation">{{trackRecommendation.trackDuration | miliToMin}}</td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: tableColumns"></tr>
+    </table>
+  </div>
+</div>

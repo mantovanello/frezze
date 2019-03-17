@@ -1,0 +1,36 @@
+table {
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+a:link {
+  color: seagreen;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: seagreen;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: mediumseagreen;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:active {
+  color: lightslategray;
+  background-color: transparent;
+  text-decoration: underline;
+}

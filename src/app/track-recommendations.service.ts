@@ -9,7 +9,7 @@ import { TrackRecommendation } from './track-recommendation'
 })
 export class TrackRecommendationsService {
 
-  private trackRecommendationsUrl = 'http://localhost:8080/list-recommendations';
+  private trackRecommendationsUrl = 'https://api-frezze.herokuapp.com/list-recommendations/';
 
   constructor(private http: HttpClient) { }
 

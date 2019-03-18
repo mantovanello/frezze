@@ -3,7 +3,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule }    from '@angular/common/http';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material';
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from  '@angular/material';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -26,7 +25,6 @@ import { TrackRecommendationsComponent } from './track-recommendations/track-rec
     HttpClientModule,
     MatFormFieldModule,
     MatInputModule,
-    MatPaginatorModule,
     MatSortModule,
     MatTableModule,
     MatToolbarModule

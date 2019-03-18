@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/angular-frezze",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

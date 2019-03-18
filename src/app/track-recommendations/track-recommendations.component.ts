@@ -1,21 +1,18 @@
-import { AfterContentChecked, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { AfterContentChecked, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort, MatTableDataSource } from '@angular/material';
 import { TrackRecommendationsService } from '../track-recommendations.service';
-import { Subscription } from 'rxjs';
-
 
 @Component({
   selector: 'app-track-recommendations',
   templateUrl: './track-recommendations.component.html',
   styleUrls: ['./track-recommendations.component.css']
 })
-export class TrackRecommendationsComponent implements OnInit, AfterContentChecked, OnDestroy {
+export class TrackRecommendationsComponent implements OnInit, AfterContentChecked {
   /**
    * Define presented table columns
    */
-  tableColumns  :  string[] = ['trackTitle', 'artistName', 'albumThumbnailURL', 'albumTitle', 'albumReleaseDate', 'trackNumber', 'trackDuration'];
+  tableColumns: string[] = ['trackTitle', 'artistName', 'albumThumbnailURL', 'albumTitle', 'albumReleaseDate', 'trackNumber', 'trackDuration'];
   dataSource = null;
-  private trackRecommendationsSubscription: Subscription;
 
   @ViewChild(MatSort) sort: MatSort;
 
@@ -26,11 +23,9 @@ export class TrackRecommendationsComponent implements OnInit, AfterContentChecke
   }
 
   ngAfterContentChecked() {
-    this.dataSource.sort = this.sort;
-  }
-
-  ngOnDestroy() {
-    this.trackRecommendationsSubscription.unsubscribe;
+    if (this.dataSource) {
+      this.dataSource.sort = this.sort;
+    }
   }
 
   applyFilter(filterValue: string) {
@@ -38,13 +33,13 @@ export class TrackRecommendationsComponent implements OnInit, AfterContentChecke
   }
 
   getTrackRecommendations(): void {
-    this.trackRecommendationsSubscription = this.trackRecommendationsService.getTrackRecommendations()
-    .subscribe(trackRecommendations => {
-      /**
-       * Populate datasource with retrieved data from service
-       */
-      this.dataSource = new MatTableDataSource(trackRecommendations)
-    });
+    this.trackRecommendationsService.getTrackRecommendations()
+      .subscribe(trackRecommendations => {
+        /**
+         * Populate datasource with retrieved data from service
+         */
+        this.dataSource = new MatTableDataSource(trackRecommendations)
+      });
   }
 
 }
